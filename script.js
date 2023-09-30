@@ -16,7 +16,9 @@
 window.addEventListener("mousemove",function(e){
     gsap.to("#cursor",{
         y:e.clientY,
-        x:e.clientX
+        x:e.clientX,
+        duration:.6,
+      
     })
 })
 
@@ -238,7 +240,7 @@ function initialize() {
     scrollTrigger: {
       trigger: "#home",
       start: "top top",
-      end: "bottom end",
+      end: "110% end",
       pin: true,
       scrub: 0.5,
       // markers:true,
@@ -278,7 +280,7 @@ function initialize() {
     scrollTrigger: {
       trigger: "#home",
       start: "1% top",
-      end: "bottom 15%",
+      end: "bottom end",
       scrub: 0.5,
       pin: true,
       // markers:true
@@ -288,6 +290,15 @@ function initialize() {
 
 var split = document.querySelectorAll(".split");
 split.forEach(function(elem){
+  let clutter = '';
+  elem.textContent.split(' ').forEach(function(char){
+    clutter += `<span>${char}</span>`
+  })
+  elem.innerHTML = clutter
+})
+
+var split1 = document.querySelectorAll(".split1");
+split1.forEach(function(elem){
   var clutter = '';
   elem.textContent.split('').forEach(function(char){
     clutter += `<span>${char}</span>`
@@ -296,7 +307,7 @@ split.forEach(function(elem){
 })
 
 function txtAnim(){
-   gsap.to("#overlay .split span",{
+   gsap.to("#overlay .split1 span",{
          opacity:0,
          duration:.5,
          stagger:.1,
@@ -317,33 +328,56 @@ function p2Anim(){
     duration:2,
     stagger:.5,
     scrollTrigger:{
-      trigger:"#page",
+      trigger:"#page2",
       start:"top top",
       end:"bottom end",
-      markers:true
-
-       
+      // markers:true,
+      scrub:true   
     }
   })
 }
 
 function p3Anim(){
-  document.querySelectorAll("#page3 .split").forEach(function(elem){
-
-    gsap.from(elem.childNodes,{
-      opacity:0.01,
-      duration:2,
-      stagger:1,
+    gsap.from("#page3 .split1 span",{
+      opacity:.1,
+      duration:4,
+      stagger:0.08,
       scrollTrigger:{
          trigger:"#page3",
-         start:"top 80%",
-         end:"50% 80%",
-         markers:true,
-        //  scrub:true
+         start:"top 90%",
+         end:"100% 80%",
+        //  markers:true,
+         scrub:true
       }
     })
+}
+function p4Anim(){
+
+  gsap.from("#page4 h2 span",{
+    opacity:.1,
+    duration:4,
+    stagger:.05,
+    scrollTrigger:{
+       trigger:"#page4",
+       start:"top 50%",
+       end:"bottom end",
+      //  markers:true,
+       scrub:true
+    }
   })
 
+  gsap.from("#page4 h1 span",{
+    opacity:.1,
+    duration:4,
+    stagger:.01,
+    scrollTrigger:{
+       trigger:"#page4",
+       start:"top 50%",
+       end:"bottom end",
+      //  markers:true,
+       scrub:true
+    }
+  })
 
 }
 
@@ -365,3 +399,4 @@ txtAnim();
 initialize();
 p2Anim();
 p3Anim();
+p4Anim();
